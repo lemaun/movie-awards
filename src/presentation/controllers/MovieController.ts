@@ -28,10 +28,7 @@ export class MovieController {
     return reply.status(200).send(winners);
   }
 
-  async getByYear(
-    request: FastifyRequest<{ Params: { year: string } }>,
-    reply: FastifyReply
-  ) {
+  async getByYear(request: FastifyRequest<{ Params: { year: string } }>, reply: FastifyReply) {
     const validated = yearParamSchema.parse(request.params);
     const year = parseInt(validated.year, 10);
     const movies = this.getMoviesUseCase.getByYear(year);

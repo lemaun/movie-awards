@@ -2,7 +2,7 @@ import { IMovieRepository } from '../../domain/repositories/IMovieRepository.js'
 import { Movie } from '../../domain/entities/Movie.js';
 
 export class GetMovies {
-  constructor(private movieRepository: IMovieRepository) { }
+  constructor(private movieRepository: IMovieRepository) {}
 
   getAll(): Movie[] {
     return this.movieRepository.findAll();

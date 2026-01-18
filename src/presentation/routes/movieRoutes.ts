@@ -1,10 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { MovieController } from '../controllers/MovieController.js';
 
-export async function movieRoutes(
-  fastify: FastifyInstance,
-  movieController: MovieController
-) {
+export async function movieRoutes(fastify: FastifyInstance, movieController: MovieController) {
   // Endpoint principal - Intervalos de produtores
   fastify.get(
     '/producer-intervals',

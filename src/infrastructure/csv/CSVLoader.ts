@@ -64,13 +64,7 @@ export async function loadCSVToDatabase(csvPath?: string): Promise<number> {
 
           const insertMany = db.transaction((moviesToInsert) => {
             for (const movie of moviesToInsert) {
-              insertStmt.run(
-                movie.year,
-                movie.title,
-                movie.studios,
-                movie.producers,
-                movie.winner
-              );
+              insertStmt.run(movie.year, movie.title, movie.studios, movie.producers, movie.winner);
             }
           });
 

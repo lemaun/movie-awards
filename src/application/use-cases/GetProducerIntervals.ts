@@ -1,11 +1,8 @@
 import { IMovieRepository } from '../../domain/repositories/IMovieRepository.js';
-import {
-  ProducerIntervalsResult,
-  ProducerInterval,
-} from '../../shared/types/ProducerInterval.js';
+import { ProducerIntervalsResult, ProducerInterval } from '../../shared/types/ProducerInterval.js';
 
 export class GetProducerIntervals {
-  constructor(private movieRepository: IMovieRepository) { }
+  constructor(private movieRepository: IMovieRepository) {}
 
   async execute(): Promise<ProducerIntervalsResult> {
     // 1. Buscar todos os filmes vencedores

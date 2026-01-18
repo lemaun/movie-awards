@@ -3,11 +3,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { AppError } from '../../shared/errors/AppError.js';
 import { ZodError } from 'zod';
 
-export async function errorHandler(
-  error: Error,
-  _request: FastifyRequest,
-  reply: FastifyReply
-) {
+export async function errorHandler(error: Error, _request: FastifyRequest, reply: FastifyReply) {
   // Erro customizado da aplicação
   if (error instanceof AppError) {
     return reply.status(error.statusCode).send({

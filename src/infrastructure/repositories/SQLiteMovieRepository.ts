@@ -67,9 +67,7 @@ export class SQLiteMovieRepository implements IMovieRepository {
   }
 
   findByProducer(producerName: string): Movie[] {
-    const stmt = db.prepare(
-      'SELECT * FROM movies WHERE producers LIKE ? ORDER BY year, title'
-    );
+    const stmt = db.prepare('SELECT * FROM movies WHERE producers LIKE ? ORDER BY year, title');
     const rows = stmt.all(`%${producerName}%`) as Array<{
       id: number;
       year: number;
