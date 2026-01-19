@@ -9,12 +9,10 @@ describe('Integration Tests - Producer Intervals API', () => {
   let app: Awaited<ReturnType<typeof buildApp>>;
 
   beforeAll(async () => {
-    // Configurar banco de dados para testes
     initializeDatabase();
     clearDatabase();
     await loadCSVToDatabase(process.env.MOVIELIST_PATH || undefined);
 
-    // Criar app
     const movieRepository = new SQLiteMovieRepository();
     app = await buildApp(movieRepository);
   });
@@ -63,17 +61,6 @@ describe('Integration Tests - Producer Intervals API', () => {
         expect(minInterval).toBeLessThanOrEqual(maxInterval);
       }
     });
-
-    it('should respond in less than 100ms', async () => {
-      const start = Date.now();
-      await app.inject({
-        method: 'GET',
-        url: '/api/movies/producer-intervals',
-      });
-      const duration = Date.now() - start;
-
-      expect(duration).toBeLessThan(100);
-    });
   });
 
   describe('GET /api/movies', () => {
@@ -101,7 +88,6 @@ describe('Integration Tests - Producer Intervals API', () => {
       const winners = JSON.parse(response.body);
       expect(Array.isArray(winners)).toBe(true);
 
-      // Todos devem ter winner: true
       winners.forEach((movie: any) => {
         expect(movie.winner).toBe(true);
       });

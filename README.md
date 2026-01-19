@@ -179,7 +179,6 @@ Os testes validam:
 - ✅ Carga correta dos dados do CSV
 - ✅ Estrutura correta da resposta do endpoint de intervalos
 - ✅ Lógica de cálculo de intervalos min/max
-- ✅ Performance (< 100ms)
 - ✅ Validação de parâmetros
 - ✅ Filtros (winners, ano, produtor)
 
@@ -285,7 +284,6 @@ npm start
 - ✨ Documentação OpenAPI/Swagger interativa
 - ✨ Validação robusta com Zod
 - ✨ Error handling centralizado
-- ✨ Performance otimizada (< 100ms)
 - ✨ Código formatado e lintado
 - ✨ Commits semânticos
 
