@@ -1,28 +1,23 @@
 import 'dotenv/config';
 import { buildApp } from './app.js';
-import { initializeDatabase } from './infrastructure/database/sqlite.js';
+import { clearDatabase, initializeDatabase } from './infrastructure/database/sqlite.js';
 import { loadCSVToDatabase } from './infrastructure/csv/CSVLoader.js';
 import { SQLiteMovieRepository } from './infrastructure/repositories/SQLiteMovieRepository.js';
 
 async function start() {
   try {
-    // Inicializar banco de dados
     console.log('🚀 Initializing database...');
     initializeDatabase();
+    clearDatabase();
 
-    // Carregar dados do CSV
     console.log('📂 Loading CSV data...');
     const csvPath = process.env.MOVIELIST_PATH || undefined;
     const count = await loadCSVToDatabase(csvPath);
     console.log(`✅ Loaded ${count} movies successfully`);
 
-    // Criar repositório
     const movieRepository = new SQLiteMovieRepository();
-
-    // Construir aplicação
     const app = await buildApp(movieRepository);
 
-    // Iniciar servidor
     const port = parseInt(process.env.PORT || '3000', 10);
     const host = process.env.HOST || '0.0.0.0';
 
