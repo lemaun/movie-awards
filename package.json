@@ -1,5 +1,5 @@
 {
-  "name": "outsera-api-assessment",
+  "name": "movie-awards-api",
   "version": "1.0.0",
   "description": "API RESTful para consulta de indicados e vencedores do Golden Raspberry Awards",
   "main": "dist/server.js",
