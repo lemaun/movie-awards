@@ -61,6 +61,35 @@ describe('Integration Tests - Producer Intervals API', () => {
         expect(minInterval).toBeLessThanOrEqual(maxInterval);
       }
     });
+
+    it('should return expected min/max intervals for movielist.csv dataset', async () => {
+      const response = await app.inject({
+        method: 'GET',
+        url: '/api/movies/producer-intervals',
+      });
+
+      expect(response.statusCode).toBe(200);
+      const body = JSON.parse(response.body);
+
+      expect(body).toEqual({
+        min: [
+          {
+            producer: 'Joel Silver',
+            interval: 1,
+            previousWin: 1990,
+            followingWin: 1991,
+          },
+        ],
+        max: [
+          {
+            producer: 'Matthew Vaughn',
+            interval: 13,
+            previousWin: 2002,
+            followingWin: 2015,
+          },
+        ],
+      });
+    });
   });
 
   describe('GET /api/movies', () => {
