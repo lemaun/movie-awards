@@ -2,7 +2,6 @@ import { FastifyInstance } from 'fastify';
 import { MovieController } from '../controllers/MovieController.js';
 
 export async function movieRoutes(fastify: FastifyInstance, movieController: MovieController) {
-  // Endpoint principal - Intervalos de produtores
   fastify.get(
     '/producer-intervals',
     {
@@ -46,7 +45,6 @@ export async function movieRoutes(fastify: FastifyInstance, movieController: Mov
     movieController.getProducerIntervals.bind(movieController)
   );
 
-  // Listar todos os filmes
   fastify.get(
     '/',
     {
@@ -64,7 +62,6 @@ export async function movieRoutes(fastify: FastifyInstance, movieController: Mov
     movieController.getAllMovies.bind(movieController)
   );
 
-  // Listar apenas vencedores
   fastify.get(
     '/winners',
     {
@@ -82,7 +79,6 @@ export async function movieRoutes(fastify: FastifyInstance, movieController: Mov
     movieController.getWinners.bind(movieController)
   );
 
-  // Buscar por ano
   fastify.get(
     '/year/:year',
     {
@@ -107,7 +103,6 @@ export async function movieRoutes(fastify: FastifyInstance, movieController: Mov
     movieController.getByYear.bind(movieController)
   );
 
-  // Buscar por produtor
   fastify.get(
     '/producer',
     {

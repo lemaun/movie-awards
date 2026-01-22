@@ -15,7 +15,6 @@ export async function buildApp(movieRepository: IMovieRepository) {
     },
   });
 
-  // Registrar plugins
   await app.register(cors, {
     origin: '*',
   });
@@ -49,10 +48,8 @@ export async function buildApp(movieRepository: IMovieRepository) {
     },
   });
 
-  // Criar controller
   const movieController = new MovieController(movieRepository);
 
-  // Registrar rotas
   await app.register(
     async (instance) => {
       await movieRoutes(instance, movieController);
@@ -60,12 +57,10 @@ export async function buildApp(movieRepository: IMovieRepository) {
     { prefix: '/api/movies' }
   );
 
-  // Health check
   app.get('/health', async () => {
     return { status: 'ok', timestamp: new Date().toISOString() };
   });
 
-  // Registrar error handler
   app.setErrorHandler(errorHandler);
 
   return app;

@@ -36,14 +36,12 @@ export async function loadCSVToDatabase(csvPath?: string): Promise<number> {
       .pipe(csv({ separator: ';' }))
       .on('data', (row: CSVRow) => {
         try {
-          // Parse dos dados
           const year = parseInt(row.year, 10);
           const title = row.title?.trim() || '';
           const studios = row.studios?.trim() || '';
           const producers = row.producers?.trim() || '';
           const winner = row.winner?.trim().toLowerCase() === 'yes' ? 1 : 0;
 
-          // Validação básica
           if (!year || !title) {
             console.warn(`⚠️  Skipping invalid row: ${JSON.stringify(row)}`);
             return;
@@ -56,7 +54,6 @@ export async function loadCSVToDatabase(csvPath?: string): Promise<number> {
       })
       .on('end', () => {
         try {
-          // Inserção em lote usando transaction para performance
           const insertStmt = db.prepare(`
             INSERT INTO movies (year, title, studios, producers, winner)
             VALUES (?, ?, ?, ?, ?)

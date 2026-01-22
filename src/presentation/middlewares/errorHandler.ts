@@ -4,7 +4,6 @@ import { AppError } from '../../shared/errors/AppError.js';
 import { ZodError } from 'zod';
 
 export async function errorHandler(error: Error, _request: FastifyRequest, reply: FastifyReply) {
-  // Erro customizado da aplicação
   if (error instanceof AppError) {
     return reply.status(error.statusCode).send({
       error: error.message,
@@ -12,7 +11,6 @@ export async function errorHandler(error: Error, _request: FastifyRequest, reply
     });
   }
 
-  // Erro de validação Zod
   if (error instanceof ZodError) {
     return reply.status(400).send({
       error: 'Validation error',
@@ -23,7 +21,6 @@ export async function errorHandler(error: Error, _request: FastifyRequest, reply
     });
   }
 
-  // Erro genérico
   console.error('Unhandled error:', error);
   return reply.status(500).send({
     error: 'Internal server error',
